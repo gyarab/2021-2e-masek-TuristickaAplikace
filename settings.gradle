@@ -1,0 +1,4 @@
+rootProject.name = "Sightseer"
+include ':app'
+include ':openCVLib'
+include ':sdk'

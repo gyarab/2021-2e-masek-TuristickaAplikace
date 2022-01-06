@@ -1,0 +1,172 @@
+{
+  "abi": "X86_64",
+  "info": {
+    "abi": "X86_64",
+    "bitness": 64,
+    "deprecated": false,
+    "default": true
+  },
+  "cxxBuildFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\.cxx\\Debug\\1e91u112\\x86_64",
+  "soFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cxx\\Debug\\1e91u112\\obj\\x86_64",
+  "soRepublishFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cmake\\debug\\obj\\x86_64",
+  "abiPlatformVersion": 21,
+  "cmake": {
+    "effectiveConfiguration": {
+      "inheritEnvironments": [],
+      "variables": []
+    }
+  },
+  "variant": {
+    "buildSystemArgumentList": [
+      "-DANDROID_STL\u003dc++_shared"
+    ],
+    "cFlagsList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "soFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cxx\\Debug\\1e91u112\\obj",
+    "soRepublishFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cmake\\debug\\obj",
+    "cxxBuildFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\.cxx\\Debug\\1e91u112",
+    "intermediatesFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cxx\\Debug\\1e91u112",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [
+      "opencv_jni_shared"
+    ],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "module": {
+      "cxxFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\.cxx",
+      "intermediatesBaseFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates",
+      "intermediatesFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cxx",
+      "gradleModulePathName": ":openCVLib",
+      "moduleRootFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib",
+      "moduleBuildFile": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build.gradle",
+      "makeFile": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\libcxx_helper\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "ndkFolder": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529",
+      "ndkVersion": "21.4.7075529",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkMetaPlatforms": {
+        "min": 16,
+        "max": 30,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29,
+          "R": 30
+        }
+      },
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "cmakeToolchainFile": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake",
+      "cmake": {
+        "isValidCmakeAvailable": true,
+        "cmakeExe": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+        "minimumCmakeVersion": "3.10.2",
+        "ninjaExe": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+      },
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      },
+      "project": {
+        "rootBuildGradleFolder": "D:\\Programy\\NetBeansProjects\\Sightseer",
+        "sdkFolder": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": false
+      },
+      "nativeBuildOutputLevel": "QUIET"
+    },
+    "prefabClassPathFileCollection": [],
+    "prefabPackageDirectoryListFileCollection": [],
+    "stlType": "c++_shared",
+    "optimizationTag": "Debug"
+  },
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "prefabFolder": "D:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\.cxx\\Debug\\1e91u112\\prefab\\x86_64",
+  "isActiveAbi": true,
+  "fullConfigurationHash": "1e91u1126b5iza62i3g412t2h16662w35y534u5w1km4t703x3p1s2v",
+  "configurationArguments": [
+    "-HD:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\libcxx_helper",
+    "-DCMAKE_SYSTEM_NAME\u003dAndroid",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON",
+    "-DCMAKE_SYSTEM_VERSION\u003d21",
+    "-DANDROID_PLATFORM\u003dandroid-21",
+    "-DANDROID_ABI\u003dx86_64",
+    "-DCMAKE_ANDROID_ARCH_ABI\u003dx86_64",
+    "-DANDROID_NDK\u003dC:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529",
+    "-DCMAKE_ANDROID_NDK\u003dC:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529",
+    "-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake",
+    "-DCMAKE_MAKE_PROGRAM\u003dC:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cxx\\Debug\\1e91u112\\obj\\x86_64",
+    "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\build\\intermediates\\cxx\\Debug\\1e91u112\\obj\\x86_64",
+    "-DCMAKE_BUILD_TYPE\u003dDebug",
+    "-BD:\\Programy\\NetBeansProjects\\Sightseer\\openCVLib\\.cxx\\Debug\\1e91u112\\x86_64",
+    "-GNinja",
+    "-DANDROID_STL\u003dc++_shared"
+  ],
+  "stlLibraryFile": "C:\\Users\\denis\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+}

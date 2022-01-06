@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sightseer</string>
+    <string name="photo">Takes a photo</string>
+    <string name="similarity">0</string>
+</resources>
