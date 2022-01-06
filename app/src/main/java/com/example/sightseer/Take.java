@@ -15,12 +15,13 @@ import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2, View.OnClickListener {
     private static String TAG = "MainActivity";
     JavaCamera2View javaCameraView;
-    Mat mRGBA, mRGBAT;
+    Mat mRGBA, mRGBAT, testMat;
     Mat test;
     TextView similarita;
     ImageButton photo;
@@ -65,7 +66,7 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
 
     @Override
     public void onCameraViewStarted(int width, int height) {
-        javaCameraView.setMaxFrameSize(720,1280);
+        //javaCameraView.setMaxFrameSize(480, 720);
         mRGBA = new Mat(height, width, CvType.CV_8UC4);
     }
 
@@ -79,7 +80,11 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
         mRGBA = inputFrame.rgba();
         mRGBAT = mRGBA.t();
         Core.flip(mRGBA.t(), mRGBAT, 1);
+        Size newsize = mRGBA.size();
+        /*newsize.height = 480;
+        newsize.width = 640;*/
         Imgproc.resize(mRGBAT, mRGBAT, mRGBA.size());
+        /*Imgproc.resize(mRGBAT, testMat, new Size(480, 720),0,0,Imgproc.INTER_CUBIC);*/
         return mRGBAT;
     }
 
@@ -121,12 +126,19 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
 
     @Override
     public void onClick(View v) {
-        if (a) {
+        similarita.setText((int) mRGBA.size().width + " " + (int) mRGBA.size().height);
+        //setResolution(480, 1920);
+        /*if (a) {
             test = mRGBAT;
             a = false;
         } else {
             Compare compare = new Compare(mRGBAT, test);
             similarita.setText(Double.toString(compare.compare()));
-        }
+        }*/
+    }
+
+    public void setResolution(int width, int height) {
+        javaCameraView.disconnectCamera();
+        javaCameraView.connectCamera(width, height);
     }
 }

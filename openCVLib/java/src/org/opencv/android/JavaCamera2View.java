@@ -229,7 +229,7 @@ public class JavaCamera2View extends CameraBridgeViewBase {
     }
 
     @Override
-    protected void disconnectCamera() {
+    public void disconnectCamera() {
         Log.i(LOGTAG, "close camera");
         try {
             CameraDevice c = mCameraDevice;
@@ -297,7 +297,7 @@ public class JavaCamera2View extends CameraBridgeViewBase {
     }
 
     @Override
-    protected boolean connectCamera(int width, int height) {
+    public boolean connectCamera(int width, int height) {
         Log.i(LOGTAG, "setCameraPreviewSize(" + width + "x" + height + ")");
         startBackgroundThread();
         initializeCamera();

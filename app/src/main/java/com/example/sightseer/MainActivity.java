@@ -26,6 +26,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener /*LocationListener*/ {
     Button bt;
+    Button take;
     TextView textView;
     FusedLocationProviderClient fLPC;
     List<Address> addresses;
@@ -48,9 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);*/
         textView = findViewById(R.id.geo);
         bt = findViewById(R.id.button);
+        take = findViewById(R.id.take);
 
         fLPC = LocationServices.getFusedLocationProviderClient(this);
         bt.setOnClickListener(this);
+        take.setOnClickListener(this);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.button) {
             if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 getLocation();
-            } else {
+            } else if (v.getId() == R.id.take) {
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
             }
         } else {
