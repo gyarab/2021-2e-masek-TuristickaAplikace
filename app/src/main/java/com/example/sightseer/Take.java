@@ -126,15 +126,15 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
 
     @Override
     public void onClick(View v) {
-        similarita.setText((int) mRGBA.size().width + " " + (int) mRGBA.size().height);
+        //similarita.setText((int) mRGBA.size().width + " " + (int) mRGBA.size().height);
         //setResolution(480, 1920);
-        /*if (a) {
+        if (a) {
             test = mRGBAT;
             a = false;
         } else {
             Compare compare = new Compare(mRGBAT, test);
             similarita.setText(Double.toString(compare.compare()));
-        }*/
+        }
     }
 
     public void setResolution(int width, int height) {
