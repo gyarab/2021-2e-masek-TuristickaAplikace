@@ -22,10 +22,11 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
     private static String TAG = "MainActivity";
     JavaCamera2View javaCameraView;
     Mat mRGBA, mRGBAT, testMat;
-    Mat test;
+    Mat temp;
     TextView similarita;
     ImageButton photo;
     Boolean a = true;
+    Mat img;
     BaseLoaderCallback baseLoaderCallback = new BaseLoaderCallback(Take.this) {
         @Override
         public void onManagerConnected(int status) {
@@ -62,6 +63,8 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
         ImageButton photo = (ImageButton) findViewById(R.id.takePhoto);
         photo.setOnClickListener(this);
         similarita = (TextView) findViewById(R.id.textView);
+        temp = new Mat(this.getIntent().getExtras().getLong("addr"));
+        img = temp.clone();
     }
 
     @Override
@@ -128,17 +131,16 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
     public void onClick(View v) {
         //similarita.setText((int) mRGBA.size().width + " " + (int) mRGBA.size().height);
         //setResolution(480, 1920);
-        if (a) {
-            test = mRGBAT;
-            a = false;
+        Compare compare = new Compare(mRGBAT, img);
+        similarita.setText(Double.toString(compare.compare()));
+        //similarita.setText(Environment.getExternalStorageState());
+        //Imgcodecs.imwrite("openimg.png", mRGBAT);
+        /*String imgFileName = "openimg.png";
+        boolean imwrite = Imgcodecs.imwrite(imgFileName, mRGBAT);
+        if (imwrite) {
+            similarita.setText(imgFileName);
         } else {
-            Compare compare = new Compare(mRGBAT, test);
-            similarita.setText(Double.toString(compare.compare()));
-        }
-    }
-
-    public void setResolution(int width, int height) {
-        javaCameraView.disconnectCamera();
-        javaCameraView.connectCamera(width, height);
+            similarita.setText("failed");
+        }*/
     }
 }

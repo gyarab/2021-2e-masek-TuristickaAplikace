@@ -2,4 +2,5 @@
     <string name="app_name">Sightseer</string>
     <string name="photo">Takes a photo</string>
     <string name="similarity">0</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoidmVuZGVsaW4wNSIsImEiOiJja3lmeW5sOWUwaHN0MzJsZ210c2VkcXRxIn0.LZJWKdN958PIMuVOs8PNXA</string>
 </resources>
