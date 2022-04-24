@@ -15,15 +15,29 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.squareup.picasso.Picasso;
 
 import org.opencv.android.OpenCVLoader;
@@ -37,11 +51,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener /*LocationListener*/ {
     ImageButton bt;
+    Button signin;
     Button take1;
     Button take2;
     Button take3;
     ImageButton map1;
-    TextView textView;
+    TextView latText;
+    TextView lngText;
     FusedLocationProviderClient fLPC;
     List<Address> addresses;
     RelativeLayout rl;
@@ -56,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] adresy = new String[3];
     double[] vysledky = new double[3];
     Bitmap bmp;
+
+    //private ActivityMainBinding binding;
+    private static final int RC_SIGN_IN = 100;
+    private GoogleSignInClient googleSignInClient;
+    private FirebaseAuth firebaseAuth;
+    private static final String TAG = "GOOGLE_SIGN_IN_TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +95,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);*/
-        textView = findViewById(R.id.geo);
+        latText = findViewById(R.id.lat);
+        lngText = findViewById(R.id.lng);
         bt = findViewById(R.id.button);
+        signin = findViewById(R.id.signin);
         take1 = findViewById(R.id.take1);
         take2 = findViewById(R.id.take2);
         take3 = findViewById(R.id.take3);
@@ -100,7 +124,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         take1.setOnClickListener(this);
         take2.setOnClickListener(this);
         take3.setOnClickListener(this);
+        signin.setOnClickListener(this);
         map1.setOnClickListener(this);
+
+        //Nastaveni Google prihlaseni - je pozde v noci a chce se mi umrit
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        //Ted Firebase
+        firebaseAuth = FirebaseAuth.getInstance();
+
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getLocation();
             sortLocations();
@@ -191,6 +227,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtras(b);
                 startActivity(intent);
             }
+        } else if (v.getId() == R.id.signin) {
+            Intent intent = googleSignInClient.getSignInIntent();
+            startActivityForResult(intent, RC_SIGN_IN);
         } else if (v.getId() == R.id.take1) {
             //Picasso.get().load("https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec").into(iw1);
 //            Picasso.get().load(adresy[2]).into(new Target() {
@@ -272,7 +311,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //textView.setText("Latitude: " + addresses.get(0).getLatitude() + " Longitude: " + addresses.get(0).getLongitude());
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
-                    textView.setText(Double.toString(location.getLatitude()) + " " + Double.toString(location.getLongitude()));
+                    latText.setText(Double.toString(location.getLatitude()));
+                    lngText.setText(Double.toString(location.getLongitude()));
                 }
             }
         });
@@ -342,5 +382,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Picasso.get().load(adresy[1]).into(iw3);
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = accountTask.getResult(ApiException.class);
+                firebaseAuthWithGoogleAccount(account);
+            } catch (Exception e) {
+                System.out.println("Login failed!");
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        System.out.println("Firebase signin successful");
+                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        String uid = firebaseUser.getUid();
+                        String email = firebaseUser.getEmail();
+                        if (authResult.getAdditionalUserInfo().isNewUser()) {
+                            Toast.makeText(MainActivity.this, "Account created", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
+                        }
+                        signin.setText(email);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Firebase signin failed");
+                    }
+                });
     }
 }
