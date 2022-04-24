@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "347088539740",
+    "project_id": "sightseer-294ba",
+    "storage_bucket": "sightseer-294ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347088539740:android:65062b02bcc3326a075699",
+        "android_client_info": {
+          "package_name": "com.example.sightseer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347088539740-deq85khad9se3kt9jd3jbp0e2697bv6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sightseer",
+            "certificate_hash": "b69749f38004ecebeadd5f6c0237fc2d2ac47c19"
+          }
+        },
+        {
+          "client_id": "347088539740-vv7fp32k3bq9vmakbuvr3565u05qmr12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY5IaAKHxGAkKffA2O1CL2aX2MIgnAWfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347088539740-vv7fp32k3bq9vmakbuvr3565u05qmr12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

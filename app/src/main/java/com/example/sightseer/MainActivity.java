@@ -4,7 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,7 +25,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
@@ -99,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adresy[2] = "https://turistickyatlas.cz/galery/galerie/svrkyne8.jpg";
         bt.setOnClickListener(this);
         take1.setOnClickListener(this);
+        take2.setOnClickListener(this);
+        take3.setOnClickListener(this);
         map1.setOnClickListener(this);
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getLocation();
@@ -190,24 +191,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtras(b);
                 startActivity(intent);
             }
-        } else {
+        } else if (v.getId() == R.id.take1) {
             //Picasso.get().load("https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec").into(iw1);
-            Picasso.get().load(adresy[2]).into(new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    // Set it in the ImageView
-                    bmp = bitmap;
-                }
-
-                @Override
-                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-                }
-            });
+//            Picasso.get().load(adresy[2]).into(new Target() {
+//                @Override
+//                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//                    // Set it in the ImageView
+//                    bmp = bitmap;
+//                }
+//
+//                @Override
+//                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+//
+//                }
+//
+//                @Override
+//                public void onPrepareLoad(Drawable placeHolderDrawable) {
+//                }
+//            });
+            BitmapDrawable drawable = (BitmapDrawable) iw1.getDrawable();
+            bmp = drawable.getBitmap();
+            OpenCVLoader.initDebug();
+            //Bitmap bmp = getBitmapFromURL(adresy[0]);
+            Mat test = new Mat(bmp.getHeight(), bmp.getWidth(), CvType.CV_8UC4);
+            Utils.bitmapToMat(bmp, test);
+            Intent a = new Intent(this, Take.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("addr", test.getNativeObjAddr());
+            a.putExtras(bundle);
+            startActivity(a);
+        } else if (v.getId() == R.id.take2) {
+            BitmapDrawable drawable = (BitmapDrawable) iw2.getDrawable();
+            bmp = drawable.getBitmap();
+            OpenCVLoader.initDebug();
+            //Bitmap bmp = getBitmapFromURL(adresy[0]);
+            Mat test = new Mat(bmp.getHeight(), bmp.getWidth(), CvType.CV_8UC4);
+            Utils.bitmapToMat(bmp, test);
+            Intent a = new Intent(this, Take.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("addr", test.getNativeObjAddr());
+            a.putExtras(bundle);
+            startActivity(a);
+        } else if (v.getId() == R.id.take3) {
+            BitmapDrawable drawable = (BitmapDrawable) iw3.getDrawable();
+            bmp = drawable.getBitmap();
             OpenCVLoader.initDebug();
             //Bitmap bmp = getBitmapFromURL(adresy[0]);
             Mat test = new Mat(bmp.getHeight(), bmp.getWidth(), CvType.CV_8UC4);

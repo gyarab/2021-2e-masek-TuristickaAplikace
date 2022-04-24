@@ -21,7 +21,7 @@ import org.opencv.imgproc.Imgproc;
 public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2, View.OnClickListener {
     private static String TAG = "MainActivity";
     JavaCamera2View javaCameraView;
-    Mat mRGBA, mRGBAT, testMat;
+    Mat mRGBA, mRGBAT;
     Mat temp;
     TextView similarita;
     ImageButton photo;
@@ -132,7 +132,11 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
         //similarita.setText((int) mRGBA.size().width + " " + (int) mRGBA.size().height);
         //setResolution(480, 1920);
         Compare compare = new Compare(mRGBAT, img);
-        similarita.setText(Double.toString(compare.compare()));
+        double similar = compare.compare();
+        similarita.setText(Double.toString(similar));
+        if (similar > 0.1) {
+
+        }
         //similarita.setText(Environment.getExternalStorageState());
         //Imgcodecs.imwrite("openimg.png", mRGBAT);
         /*String imgFileName = "openimg.png";

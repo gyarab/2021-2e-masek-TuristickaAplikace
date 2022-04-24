@@ -105,6 +105,6 @@ public class Compare {
 
         //System.out.println(image1[0] + ", " + image1[1] + ", " + image1[2]);
         //System.out.println(image2[0] + ", " + image2[1] + ", " + image2[2]);
-        return round(percentage, 1);
+        return round(percentage, 2);
     }
 }
