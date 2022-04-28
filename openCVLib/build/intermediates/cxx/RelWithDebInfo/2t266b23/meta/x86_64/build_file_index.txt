@@ -1,1 +1,0 @@
-D:\Programy\NetBeansProjects\Sightseer\openCVLib\libcxx_helper\CMakeLists.txt

@@ -38,6 +38,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.opencv.android.OpenCVLoader;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] adresy = new String[3];
     double[] vysledky = new double[3];
     Bitmap bmp;
+    DatabaseReference databaseRef;
 
     //private ActivityMainBinding binding;
     private static final int RC_SIGN_IN = 100;
@@ -108,18 +111,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iw2 = findViewById(R.id.imageView2);
         iw3 = findViewById(R.id.imageView3);
         fLPC = LocationServices.getFusedLocationProviderClient(this);
-        lats[0] = 50.086917;
-        lats[1] = 49.952;
-        lats[2] = 50.174957;
-        lngs[0] = 14.420777;
-        lngs[1] = 15.795;
-        lngs[2] = 14.291465;
-        jmena[0] = "Praha";
-        jmena[1] = "Chrudim";
-        jmena[2] = "Svrkyně";
-        adresy[0] = "https://i.pinimg.com/736x/bf/17/f2/bf17f2b04bbff1814edfb2cb024d8d7d.jpg";
-        adresy[1] = "https://foto.turistika.cz/foto/r/450/11885/36808/full_9ba5de_f_normalFile1-img_3455.jpg";
-        adresy[2] = "https://turistickyatlas.cz/galery/galerie/svrkyne8.jpg";
+        lats[0] = 50.080306;
+        lats[1] = 50.099;
+        lats[2] = 50.087;
+        lngs[0] = 14.429349;
+        lngs[1] = 14.359;
+        lngs[2] = 14.421;
+        jmena[0] = "Svatý Václav";
+        jmena[1] = "Okrasná lavička";
+        jmena[2] = "Pražský Orloj";
+        adresy[0] = "https://cdn.discordapp.com/attachments/714896462957379637/968958574485196840/20220203_134154.jpg";
+        adresy[1] = "https://cdn.discordapp.com/attachments/714896462957379637/968958589999935558/20220203_131650.jpg";
+        adresy[2] = "https://cdn.discordapp.com/attachments/714896462957379637/968958600422764554/20220203_140345.jpg";
         bt.setOnClickListener(this);
         take1.setOnClickListener(this);
         take2.setOnClickListener(this);
@@ -127,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signin.setOnClickListener(this);
         map1.setOnClickListener(this);
 
-        //Nastaveni Google prihlaseni - je pozde v noci a chce se mi umrit
+        //Nastaveni Google prihlaseni
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -136,12 +139,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Ted Firebase
         firebaseAuth = FirebaseAuth.getInstance();
+        databaseRef = FirebaseDatabase.getInstance().getReference();
 
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getLocation();
             sortLocations();
         } else {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, 44);
         }
     }
 
@@ -248,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                public void onPrepareLoad(Drawable placeHolderDrawable) {
 //                }
 //            });
+            databaseRef.child("test").setValue("take1");
             BitmapDrawable drawable = (BitmapDrawable) iw1.getDrawable();
             bmp = drawable.getBitmap();
             OpenCVLoader.initDebug();

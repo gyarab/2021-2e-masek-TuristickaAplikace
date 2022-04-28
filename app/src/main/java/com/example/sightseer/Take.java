@@ -133,9 +133,9 @@ public class Take extends AppCompatActivity implements CameraBridgeViewBase.CvCa
         //setResolution(480, 1920);
         Compare compare = new Compare(mRGBAT, img);
         double similar = compare.compare();
-        similarita.setText(Double.toString(similar));
-        if (similar > 0.1) {
-
+        similarita.setText("" + similar);
+        if (similar >= 0.02) {
+            similarita.setText("Ověřeno ✔");
         }
         //similarita.setText(Environment.getExternalStorageState());
         //Imgcodecs.imwrite("openimg.png", mRGBAT);
